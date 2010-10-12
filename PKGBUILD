@@ -1,6 +1,6 @@
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 pkgname=xkeyboard-config
-pkgver=1.9
+pkgver=2.0
 pkgrel=1
 pkgdesc="X keyboard configuration files"
 arch=(any)
@@ -12,7 +12,7 @@ provides=('xkbdata')
 replaces=('xkbdata')
 conflicts=('xkbdata')
 source=(http://people.freedesktop.org/~svu/${pkgname}-${pkgver}.tar.bz2)
-md5sums=('1fe14114db8e4f121060663d1fa5e214')
+md5sums=('bb8a98ee61cdc4bd835fdfd2b5cee3e6')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
