@@ -27,6 +27,9 @@ build() {
   meson configure build
 
   ninja -C build
+
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  patch -Np1 -i ../../mh-keys.patch
 }
 
 check() {

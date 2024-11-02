@@ -1,0 +1,157 @@
+diff --git a/compat/mousekeys b/compat/mousekeys
+index 094ac4c..23bb4b9 100644
+--- a/compat/mousekeys
++++ b/compat/mousekeys
+@@ -9,6 +9,63 @@ default partial xkb_compatibility "mousekeys" {
+ 
+     interpret.repeat= True;
+ 
++    // mine
++    interpret h {
++	action = MovePtr(x=-1,y=+0);
++    };
++    interpret j {
++	action = MovePtr(x=+0,y= +1);
++    };
++    interpret k {
++	action = MovePtr(x=+0,y=-1);
++    };
++    interpret l {
++	action = MovePtr(x=+1,y=+0);
++    };
++
++    interpret y {
++	action = MovePtr(x=-1,y=-1);
++    };
++    interpret u {
++	action = MovePtr(x=-1,y= +1);
++    };
++    interpret i {
++	action = MovePtr(x=+1,y=-1);
++    };
++    interpret o {
++	action = MovePtr(x=+1,y=+1);
++    };
++
++    interpret c {
++	action = MovePtr(x=959, y=539);
++    };
++
++    interpret p {
++        action = PointerButton(button=4, count=3);
++    };
++    interpret n {
++        action = PointerButton(button=5, count=3);
++    };
++
++    interpret a {
++	action = SetPtrDflt(affect=defaultButton,button=1);
++    };
++    interpret s {
++	action = SetPtrDflt(affect=defaultButton,button=2);
++    };
++    interpret d {
++	action = SetPtrDflt(affect=defaultButton,button=3);
++    };
++
++    interpret Tab {
++	action = LockPointerButton(button=default,affect=lock);
++    };
++
++    interpret space {
++	action = PointerButton(button=default);
++    };
++    // theirs
++
+     interpret KP_1 {
+ 	action = MovePtr(x=-1,y= +1);
+     };
+@@ -107,7 +164,7 @@ default partial xkb_compatibility "mousekeys" {
+ 	action = LockPointerButton(button=default,affect=lock);
+     };
+ 
+-    interpret KP_Decimal {
++    interpret ISO_Left_Tab {
+ 	action = LockPointerButton(button=default,affect=unlock);
+     };
+     interpret KP_Delete {
+@@ -193,7 +250,7 @@ default partial xkb_compatibility "mousekeys" {
+     };
+ 
+     // Allow an indicator for MouseKeys.
+-    indicator "Mouse Keys" {
++    indicator "Caps Lock" {
+ 	indicatorDrivesKeyboard;
+ 	controls= MouseKeys;
+     };
+diff --git a/symbols/keypad b/symbols/keypad
+index c35d8d1..b3cd84e 100644
+--- a/symbols/keypad
++++ b/symbols/keypad
+@@ -575,7 +575,8 @@ xkb_symbols "atm" {
+ 
+ partial modifier_keys
+ xkb_symbols "pointerkeys" {
+-    key <NMLK> { [ Num_Lock, Pointer_EnableKeys ] };
++    // key <RTRN> {[ Return, Pointer_EnableKeys ]};
++    key <RTSH> {[ Shift_R, Pointer_EnableKeys ]};
+ };
+ 
+ 
+diff --git a/symbols/us b/symbols/us
+index 89b14e6..8a0bfb3 100644
+--- a/symbols/us
++++ b/symbols/us
+@@ -57,6 +57,52 @@ xkb_symbols "basic" {
+     key <AB10>	{[   slash,	 question	]};
+ };
+ 
++partial alphanumeric_keys modifier_keys 
++xkb_symbols "mh" {
++    include "us(basic)"
++
++    name[Group1]= "English (US, mh layout)";
++
++    // swap modifiers
++    key <CAPS>	{[	Control_L	]};
++    key <LCTL>	{[	Control_R	]};
++    modifier_map Control { <LCTL>, <CAPS> };
++
++    // key <MENU>  {[	Caps_Lock	]};
++    key <RCTL>	{[	Caps_Lock	]};
++    modifier_map Lock { <RCTL> };
++
++    // to fit with my current keyboard
++    key <TLDE>	{[	Escape,		Escape		]};
++    key <ESC>	{[	grave,		asciitilde 	]};
++
++    // swap BKSL and BKSP
++    key <BKSP>	{[	backslash,	bar		]};
++
++    key <BKSL> {
++        [BackSpace, Delete], type= "TWO_LEVEL",
++	actions[group1]= [NoAction(), RedirectKey(keycode=<DELE>, clearmods=Shift)]
++    };
++
++    // arrow keys double as HOME/END, PGUP/PGDN
++    key <UP> {
++    	[Up,Prior], type= "PC_ALT_LEVEL2",
++    	actions[group1]= [NoAction(), RedirectKey(keycode=<PGUP>, clearmods=Alt)]
++    };
++    key <DOWN> {
++    	[Down,Next], type= "PC_ALT_LEVEL2",
++    	actions[group1]= [NoAction(), RedirectKey(keycode=<PGDN>, clearmods=Alt)]
++    };
++    key <LEFT> {
++    	[Left,Home], type= "PC_ALT_LEVEL2",
++    	actions[group1]= [NoAction(), RedirectKey(keycode=<HOME>, clearmods=Alt)]
++    };
++    key <RGHT> {
++    	[Right,End], type= "PC_ALT_LEVEL2",
++    	actions[group1]= [NoAction(), RedirectKey(keycode=<END>, clearmods=Alt)]
++    };
++};
++
+ partial alphanumeric_keys
+ xkb_symbols "euro" {
+ 
