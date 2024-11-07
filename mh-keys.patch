@@ -99,10 +99,10 @@ index c35d8d1..b3cd84e 100644
  
  
 diff --git a/symbols/us b/symbols/us
-index 89b14e6..8a0bfb3 100644
+index 89b14e6..4adf946 100644
 --- a/symbols/us
 +++ b/symbols/us
-@@ -57,6 +57,52 @@ xkb_symbols "basic" {
+@@ -57,6 +57,53 @@ xkb_symbols "basic" {
      key <AB10>	{[   slash,	 question	]};
  };
  
@@ -128,9 +128,10 @@ index 89b14e6..8a0bfb3 100644
 +    // swap BKSL and BKSP
 +    key <BKSP>	{[	backslash,	bar		]};
 +
++    // C-s-DEL (\) = Terminate_Server
 +    key <BKSL> {
-+        [BackSpace, Delete], type= "TWO_LEVEL",
-+	actions[group1]= [NoAction(), RedirectKey(keycode=<DELE>, clearmods=Shift)]
++        [BackSpace, Delete, Delete, NoSymbol], type= "TWO_LEVEL_CTRL+SUPER",
++	actions[group1]= [NoAction(), RedirectKey(keycode=<DELE>, clearmods=Shift), RedirectKey(keycode=<DELE>, clearmods=Shift), Terminate()]
 +    };
 +
 +    // arrow keys double as HOME/END, PGUP/PGDN
@@ -155,3 +156,24 @@ index 89b14e6..8a0bfb3 100644
  partial alphanumeric_keys
  xkb_symbols "euro" {
  
+diff --git a/types/pc b/types/pc
+index f3f3000..9cd7bf8 100644
+--- a/types/pc
++++ b/types/pc
+@@ -46,4 +46,16 @@ default partial xkb_types "default" {
+ 	level_name[Level5] = "Ctrl+Alt";
+     };
+ 
++    type "TWO_LEVEL_CTRL+SUPER" {
++	modifiers = Shift + Control + Mod4;
++	map[None] = Level1;
++	map[Shift] = Level2;
++	map[Shift+Control] = Level3;
++	map[Control+Mod4] = Level4;
++	preserve[Shift] = Shift;
++	level_name[Level1] = "Base";
++	level_name[Level2] = "Shift";
++	level_name[Level3] = "Shift Ctrl";
++	level_name[Level4] = "Ctrl+Super";
++    };
+ };
