@@ -99,10 +99,10 @@ index c35d8d1..b3cd84e 100644
  
  
 diff --git a/symbols/us b/symbols/us
-index 89b14e6..4adf946 100644
+index 2833c5a..3b704f8 100644
 --- a/symbols/us
 +++ b/symbols/us
-@@ -57,6 +57,53 @@ xkb_symbols "basic" {
+@@ -57,6 +57,55 @@ xkb_symbols "basic" {
      key <AB10>	{[   slash,	 question	]};
  };
  
@@ -118,8 +118,8 @@ index 89b14e6..4adf946 100644
 +    modifier_map Control { <LCTL>, <CAPS> };
 +
 +    // key <MENU>  {[	Caps_Lock	]};
-+    key <RCTL>	{[	Caps_Lock	]};
-+    modifier_map Lock { <RCTL> };
++    // key <RCTL>	{[	Control_R, Caps_Lock	], type= "PC_CONTROL_LEVEL2"};
++    // modifier_map Lock { <RCTL> };
 +
 +    // to fit with my current keyboard
 +    key <TLDE>	{[	Escape,		Escape		]};
@@ -129,10 +129,12 @@ index 89b14e6..4adf946 100644
 +    key <BKSP>	{[	backslash,	bar		]};
 +
 +    // C-s-DEL (\) = Terminate_Server
-+    key <BKSL> {
-+        [BackSpace, Delete, Delete, NoSymbol], type= "TWO_LEVEL_CTRL+SUPER",
-+	actions[group1]= [NoAction(), RedirectKey(keycode=<DELE>, clearmods=Shift), RedirectKey(keycode=<DELE>, clearmods=Shift), Terminate()]
-+    };
++    // key <BKSL> {
++    //     [BackSpace, Delete, Delete, NoSymbol], type= "TWO_LEVEL_CTRL+SUPER",
++    //     actions[group1]= [NoAction(), RedirectKey(keycode=<DELE>, clearmods=Shift), RedirectKey(keycode=<DELE>, clearmods=Shift), Terminate()]
++    // };
++
++    key <BKSL> {[BackSpace, Delete]};
 +
 +    // arrow keys double as HOME/END, PGUP/PGDN
 +    key <UP> {
@@ -157,10 +159,10 @@ index 89b14e6..4adf946 100644
  xkb_symbols "euro" {
  
 diff --git a/types/pc b/types/pc
-index f3f3000..9cd7bf8 100644
+index 6b28e76..833ceb6 100644
 --- a/types/pc
 +++ b/types/pc
-@@ -46,4 +46,16 @@ default partial xkb_types "default" {
+@@ -54,4 +54,16 @@ default partial xkb_types "default" {
  	level_name[Level5] = "Ctrl+Alt";
      };
  
