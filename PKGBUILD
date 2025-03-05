@@ -18,6 +18,10 @@ sha256sums=('54d2c33eeebb031d48fa590c543e54c9bcbd0f00386ebc6489b2f47a0da4342a'
 validpgpkeys=('FFB4CCD275AAA422F5F9808E0661D98FC933A145') # Sergey Udaltsov <sergey.udaltsov@gmail.com>
 
 build() {
+  pushd "${srcdir}/${pkgname}-${pkgver}"
+  patch -Np1 -i ../../mh-keys.patch
+  popd
+
   arch-meson ${pkgname}-${pkgver} build \
     -D xkb-base="/usr/share/X11/xkb" \
     -D compat-rules=true \
@@ -27,9 +31,6 @@ build() {
   meson configure build
 
   ninja -C build
-
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -Np1 -i ../../mh-keys.patch
 }
 
 check() {
