@@ -1,5 +1,5 @@
 diff --git a/compat/mousekeys b/compat/mousekeys
-index 094ac4c..23bb4b9 100644
+index 094ac4c6..23bb4b96 100644
 --- a/compat/mousekeys
 +++ b/compat/mousekeys
 @@ -9,6 +9,63 @@ default partial xkb_compatibility "mousekeys" {
@@ -85,7 +85,7 @@ index 094ac4c..23bb4b9 100644
  	controls= MouseKeys;
      };
 diff --git a/symbols/keypad b/symbols/keypad
-index c35d8d1..b3cd84e 100644
+index c35d8d16..b3cd84ed 100644
 --- a/symbols/keypad
 +++ b/symbols/keypad
 @@ -575,7 +575,8 @@ xkb_symbols "atm" {
@@ -99,7 +99,7 @@ index c35d8d1..b3cd84e 100644
  
  
 diff --git a/symbols/us b/symbols/us
-index 2833c5a..3b704f8 100644
+index b6b28225..28a3125c 100644
 --- a/symbols/us
 +++ b/symbols/us
 @@ -57,6 +57,55 @@ xkb_symbols "basic" {
@@ -159,7 +159,7 @@ index 2833c5a..3b704f8 100644
  xkb_symbols "euro" {
  
 diff --git a/types/pc b/types/pc
-index 6b28e76..833ceb6 100644
+index 6b28e76b..833ceb66 100644
 --- a/types/pc
 +++ b/types/pc
 @@ -54,4 +54,16 @@ default partial xkb_types "default" {
